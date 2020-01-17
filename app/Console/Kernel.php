@@ -24,8 +24,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        //小说爬虫
+        $schedule->command('fiction:list')->everyMinute();
+
+        for ($i = 0;$i<4;$i++)
+            $schedule->command('fiction:article')->everyMinute();
+
+        for ($i = 0;$i<16;$i++)
+            $schedule->command('fiction:chapter')->everyMinute();
     }
 
     /**

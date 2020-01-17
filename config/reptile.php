@@ -1,0 +1,48 @@
+<?php
+return [
+    'charset'        => 'GBK',
+    'domain'         => [
+        'http://98.126.88.66:80/',
+        'http://98.126.88.67:80/',
+        'http://98.126.88.68:80/',
+        'http://98.126.88.69:80/',
+        'http://98.126.88.70:80/',
+    ],
+    'host'           => 'http://www.quanshuwang.com/',
+    'list_url'       => 'all/postdate_{cate}_0_0_0_0_0_{page}.html',
+    'list_url_extra' => '',
+    'list_cate'      => [
+        'k_1'=>['cate' => '1', 'my_cate' => '1',],
+        'k_2'=>['cate' => '2', 'my_cate' => '2',],
+        'k_3'=>['cate' => '3', 'my_cate' => '8',],
+        'k_4'=>['cate' => '4', 'my_cate' => '3',],
+        'k_5'=>['cate' => '5', 'my_cate' => '8',],
+        'k_6'=>['cate' => '6', 'my_cate' => '8',],
+        'k_7'=>['cate' => '7', 'my_cate' => '4',],
+        'k_8'=>['cate' => '8', 'my_cate' => '6',],
+        'k_9'=>['cate' => '9', 'my_cate' => '7',],
+        'k_10'=>['cate' => '10', 'my_cate' => '7',],
+        'k_11'=>['cate' => '11', 'my_cate' => '8',],
+    ],
+
+    'list_selector_pre_filter' => '',
+    'list_selector'            => 'div.tab-item div a',
+    'list_title_selector'      => 'div.tab-item div h2',
+    'list_thumb_selector'      => 'div.tab-item div img',
+    'list_author_selector'     => 'div.tab-item div p',
+
+    'view_selector_pre_filter' => '',
+    'view_title_selector'      => 'div.detail h1',
+    'view_full_selector'       => 'meta[property=og:novel:status]|content',
+    'view_author_selector'     => 'meta[property=og:novel:author]|content',
+    'view_cate_selector'       => 'meta[property=og:novel:category]|content',
+    'view_selector'            => 'meta[property=og:description]|content',
+    'view_thumb_selector'      => 'meta[property=og:image]|content',
+    'view_url_selector'        => 'meta[property=og:image]|content',
+
+    'chapter_selector_pre_filter' => '',
+    'chapter_area_selector'       => 'div.dirconone',
+    'chapter_regx'                => '<li><a href="[link]" title="[title]">[string]</a></li>',
+    'chapter_cont_selector'       => 'div#content',
+    'chapter_cont_pre_filter'     => '{filter replace=\'ｗww.wbｚd.org\'}ｗww.35ｚww.la{/filter}[line]{filter replace=\'wwｗ.ｗbzd.org\'}www.35zｗｗ.la{/filter}[line]{filter replace=\'com\'}Org{/filter}[line]{filter replace=\'\'}<div class="gg_read_content_up">(.*)</script></div>{/filter}[line]{filter replace=\'\'}三↑五↑中↑文↑网<br/><br/>{/filter}[line]{filter replace=\'\'}三↑五↑中↑文↑网{/filter}[line]{filter replace=\'xs8.me\'}35dxs.com{/filter}',
+];
