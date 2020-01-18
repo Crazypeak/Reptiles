@@ -84,7 +84,6 @@ class Reptile
         else
             $row = DB::table('articles')->where(['font_count' => 0])->first(['id', 'url']);
 
-        var_dump($row);die;
         $data['font_count'] = 0;
         if (strpos($row->url, '_') !== FALSE) {
 //            $rules['title']    = [$this->reptile['view_title_selector'], 'text'];
