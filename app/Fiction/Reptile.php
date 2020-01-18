@@ -150,7 +150,7 @@ class Reptile
             $title = explode('，共', $matches[$title_key][$i]);
             $data['font_count'] += (int)substr($title[1], 0, -1);
 
-            $chapter_list[intval(str_replace($num_cn, $num_ar, $title[0]))] = [
+            $chapter_list[floor(str_replace($num_cn, $num_ar, $title[0]))] = [
                 'article_id'   => $row->id,
                 'chapter_id'   => intval(str_replace($this->reptile['host'] . $row->url . '/', '', $matches[$link_key][$i])),
                 'chapter_name' => $title[0],
