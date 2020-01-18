@@ -253,7 +253,7 @@ class Reptile
     private function curlGetContents(string $url, bool $un_header = FALSE)
     {
         $client = new Client();
-        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/common", [
+        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/premium", [
             'query'           => ['anonymity' => 'high_anonymous'],
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),
@@ -276,7 +276,7 @@ class Reptile
             'proxy'           => $proxy->protocol . '://' . $proxy->ip . ':' . $proxy->port,
             'cookies'         => new \GuzzleHttp\Cookie\CookieJar(),
             'headers'         => $header,
-            'verify'          => TRUE,
+            'verify'          => FALSE,
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),
         ])->getBody()->getContents();
