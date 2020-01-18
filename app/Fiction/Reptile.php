@@ -84,6 +84,7 @@ class Reptile
         else
             $row = DB::table('articles')->where(['font_count' => 0])->first(['id', 'url']);
 
+        var_dump($row);die;
         $data['font_count'] = 0;
         if (strpos($row->url, '_') !== FALSE) {
 //            $rules['title']    = [$this->reptile['view_title_selector'], 'text'];
@@ -136,15 +137,16 @@ class Reptile
         //获取规则中关键key的顺序
 
         //章节顺序
-        $num_cn = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万', '亿'];
-        $num_ar = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '', '', '', ''];
+        $num_cn = ['第十章', '十章', '百章', '千章', '万章', '亿章', '第'];
+        $num_ar = ['10', '0', '00', '000', '0000', '00000000', ''];
 
-        $num_cn += ['第十章', '十章', '百章', '千章', '万章', '亿章', '第'];
-        $num_ar += ['10', '0', '00', '000', '0000', '00000000', ''];
+        $num_cn = array_merge($num_cn, ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万', '亿']);
+        $num_ar = array_merge($num_ar, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '', '', '', '']);
 
         //正则分隔
         $pattern = str_replace(['[link]', '[title]', '[string]', '?', '/', '|', '+', '-', '.', '[', ']', 'XXXX', 'CCCC'], ['XXXX', 'XXXX', 'CCCC', '\\?', '\\/', '\\|', '\\+', '\\-', '\\.', '\\[', '\\]', '([\\w\\W]*?)', '(.*?)'], addslashes($this->reptile['chapter_regx']));
         preg_match_all('/' . $pattern . '/s', $chapter['area_html'], $matches);
+
         for ($i = 0; $i < count($matches[$link_key]); $i++) {
             //统计字数
             $title = explode('，共', $matches[$title_key][$i]);
