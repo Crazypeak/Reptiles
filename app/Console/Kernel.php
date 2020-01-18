@@ -25,12 +25,13 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //小说爬虫
-        $schedule->command('fiction:list')->everyMinute();
-
         for ($i = 0;$i<4;$i++)
+            $schedule->command('fiction:list')->everyMinute();
+
+        for ($i = 0;$i<8;$i++)
             $schedule->command('fiction:article')->everyMinute();
 
-        for ($i = 0;$i<16;$i++)
+        for ($i = 0;$i<32;$i++)
             $schedule->command('fiction:chapter')->everyMinute();
     }
 
