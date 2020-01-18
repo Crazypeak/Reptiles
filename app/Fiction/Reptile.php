@@ -251,7 +251,7 @@ class Reptile
     //curl伪装访问
     private function curlGetContents(string $url, bool $un_header = FALSE)
     {
-        $client = new Client();
+        $client = new Client(['curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1]]);
         $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/premium", [
             'query'           => ['anonymity' => 'high_anonymous'],
             'connect_timeout' => $this->timeout,
@@ -272,7 +272,10 @@ class Reptile
         ];
 
         $contents = $client->request('GET', $url, [
-            'proxy'           => 'tcp://' . $proxy->ip . ':' . $proxy->port,
+            'proxy'           => [
+                'http://' . $proxy->ip . ':' . $proxy->port,
+                'https://' . $proxy->ip . ':' . $proxy->port,
+            ],
             'cookies'         => new \GuzzleHttp\Cookie\CookieJar(),
             'headers'         => $header,
             'verify'          => FALSE,
