@@ -82,7 +82,7 @@ class Reptile
         if ($article_id)
             $row = DB::table('articles')->find($article_id, ['id', 'url']);
         else
-            $row = DB::table('articles')->whereNull('updated_at')->first(['id', 'url']);
+            $row = DB::table('articles')->where(['font_count'=>0])->first(['id', 'url']);
 
         $data['font_count'] = 0;
         if (strpos($row->url, '_') !== FALSE) {
