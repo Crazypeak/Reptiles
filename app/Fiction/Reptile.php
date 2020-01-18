@@ -278,7 +278,6 @@ class Reptile
         if (strtoupper($this->reptile['charset']) !== 'UTF-8')
             $contents = $this->changeCharset($contents);
 
-        print_r($contents);die;
         return $contents;
     }
 }
