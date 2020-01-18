@@ -155,8 +155,9 @@ class Reptile
         }
 
         if ($chapter_list ?? []) {
-            rsort($chapter_list);
-            DB::table('articles_chapter')->insertOrIgnore(array_values($chapter_list));
+            asort($chapter_list);
+            foreach ($chapter_list as $item)
+                DB::table('articles_chapter')->updateOrInsert($item);
 
             $last = end($chapter_list);
             $data['last_chapter'] = $last['chapter_name'];
