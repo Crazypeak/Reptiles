@@ -3,6 +3,7 @@
 
 namespace App\Fiction;
 
+use mysql_xdevapi\Exception;
 use QL\QueryList;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
@@ -252,7 +253,7 @@ class Reptile
     private function curlGetContents(string $url, bool $un_header = FALSE)
     {
         $client = new Client(['curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1]]);
-        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/premium", [
+        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/common", [
             'query'           => ['anonymity' => 'high_anonymous'],
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),

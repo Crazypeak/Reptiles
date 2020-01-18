@@ -26,12 +26,12 @@ class Kernel extends ConsoleKernel
     {
         //小说爬虫
         for ($i = 0;$i<4;$i++)
-            $schedule->command('fiction:list')->everyMinute();
+        $schedule->command('fiction:list')->everyMinute();
 
         for ($i = 0;$i<8;$i++)
             $schedule->command('fiction:article')->everyMinute();
 
-        for ($i = 0;$i<32;$i++)
+        for ($i = 0;$i<16;$i++)
             $schedule->command('fiction:chapter')->everyMinute();
     }
 
