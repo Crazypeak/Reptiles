@@ -82,7 +82,7 @@ class Reptile
         if ($article_id)
             $row = DB::table('articles')->find($article_id, ['id', 'url']);
         else
-            $row = DB::table('articles')->where(['font_count'=>0])->first(['id', 'url']);
+            $row = DB::table('articles')->where(['font_count' => 0])->first(['id', 'url']);
 
         $data['font_count'] = 0;
         if (strpos($row->url, '_') !== FALSE) {
@@ -136,8 +136,11 @@ class Reptile
         //获取规则中关键key的顺序
 
         //章节顺序
-        $num_cn = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '第十章', '十章', '十', '零', '第', '章'];
-        $num_ar = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10 ', '0 ', '', '0', '', ' '];
+        $num_cn = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万', '亿'];
+        $num_ar = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '', '', '', ''];
+
+        $num_cn += ['第十章', '十章', '百章', '千章', '万章', '亿章', '第'];
+        $num_ar += ['10', '0', '00', '000', '0000', '00000000', ''];
 
         //正则分隔
         $pattern = str_replace(['[link]', '[title]', '[string]', '?', '/', '|', '+', '-', '.', '[', ']', 'XXXX', 'CCCC'], ['XXXX', 'XXXX', 'CCCC', '\\?', '\\/', '\\|', '\\+', '\\-', '\\.', '\\[', '\\]', '([\\w\\W]*?)', '(.*?)'], addslashes($this->reptile['chapter_regx']));
