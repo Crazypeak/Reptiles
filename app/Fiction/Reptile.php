@@ -96,16 +96,17 @@ class Reptile
             if (!$article) return $this->saveLog('Error: article empty');;
 
             $article = $article[0];
-            if (strpos($article['thumb'], $this->reptile['domain']) !== FALSE) {
-                $data['thumb'] = '';
-            } else {
-                $thumb = file_get_contents($article['thumb']) ?: '';
-                $data['thumb'] = Storage::disk('public')->put('thumb/' . $row->id . substr($article['thumb'], -5), $thumb)
-                    ? 'thumb/' . $row->id . substr($article['thumb'], -5) : '';
-            }
+//            if (strpos($article['thumb'], $this->reptile['domain']) !== FALSE) {
+//                $data['thumb'] = '';
+//            } else {
+//                $thumb = file_get_contents($article['thumb']) ?: '';
+//                $data['thumb'] = Storage::disk('public')->put('thumb/' . $row->id . substr($article['thumb'], -5), $thumb)
+//                    ? 'thumb/' . $row->id . substr($article['thumb'], -5) : '';
+//            }
             $data['is_full'] = $article['full'] === '完本' ? 1 : 0;
             $data['category'] = $article['category'];
             $data['info'] = $article['content'];
+            $data['thumb'] = $article['thumb'];
 
             $reptile_id = substr($row->url, 5, -5);
             $data['url'] = $row->url = 'book/' . floor($reptile_id / 1000) . '/' . $reptile_id;
