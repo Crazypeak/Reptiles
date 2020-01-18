@@ -266,16 +266,13 @@ class Reptile
             'X-Forwarded-For'    => $this->rand_ip,
             "Cache-Control"      => "no-cache",
             "Accept"             => "*/*",
-            "Host"               => explode('/', $this->reptile['host'])[2],
+//            "Host"               => explode('/', $this->reptile['host'])[2],
             'User-Agent'         => 'Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
             'Referer'            => 'http://www.quanshuwang.com/',
         ];
 
-        $contents = $client->request('GET', $url, [
-            'proxy'           => [
-                'http' => 'http://' . $proxy->ip . ':' . $proxy->port,
-                'https' => 'https://' . $proxy->ip . ':' . $proxy->port,
-            ],
+        $contents = $client->request('GET', 'http://xs.xxtkfp.com/api/test', [
+            'proxy'           => $proxy->protocol . '://' . $proxy->ip . ':' . $proxy->port,
             'cookies'         => new \GuzzleHttp\Cookie\CookieJar(),
             'headers'         => $header,
             'verify'          => FALSE,
