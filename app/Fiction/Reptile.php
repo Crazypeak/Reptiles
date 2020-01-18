@@ -3,7 +3,6 @@
 
 namespace App\Fiction;
 
-use mysql_xdevapi\Exception;
 use QL\QueryList;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +16,7 @@ class Reptile
     function __construct()
     {
         $this->reptile = config('reptile');
-        if (!Storage::disk('local')->exists('cate')) {
+        if (!Storage::disk('local')->exists('log\cate')) {
             Storage::disk('local')->put('log\cate', json_encode($this->reptile['list_cate']));
             Storage::disk('local')->put('log\chapter', 1);
         }

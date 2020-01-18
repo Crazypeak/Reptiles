@@ -10,8 +10,3 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    $reptile = new \App\Fiction\Reptile();
-    return $reptile->getList();
-});

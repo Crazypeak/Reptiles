@@ -8,8 +8,8 @@ return [
 //        'http://98.126.88.69:80/',
 //        'http://98.126.88.70:80/',
 //    ],
-    'domain'         => 'http://www.quanshuwang.cn/',
-    'host'           => 'http://www.quanshuwang.cn/',
+    'domain'         => 'http://www.quanshuwang.com/',
+    'host'           => 'http://www.quanshuwang.com/',
     'list_url'       => 'all/postdate_{cate}_0_0_0_0_0_{page}.html',
     'list_url_extra' => '',
     'list_cate'      => [
