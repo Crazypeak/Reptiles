@@ -3,10 +3,10 @@
 
 namespace App\Fiction;
 
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Cache;
 use QL\QueryList;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class Reptile
@@ -21,7 +21,7 @@ class Reptile
             Storage::disk('local')->put('log\chapter', 1);
         }
 
-        $this->reptile['domain'] = $this->reptile['domain'][array_rand($this->reptile['domain'])];
+        is_array($this->reptile['domain']) and $this->reptile['domain'] = $this->reptile['domain'][array_rand($this->reptile['domain'])];
         $this->rand_ip = mt_rand(13, 255) . '.' . mt_rand(13, 255) . '.' . mt_rand(13, 255) . '.' . mt_rand(13, 255);
         $this->timeout = 8;
         $this->user_agent = 'Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)';
@@ -247,7 +247,8 @@ class Reptile
     private function curlGetContents(string $url, bool $un_header = FALSE)
     {
         $client = new Client();
-        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/premium?anonymity=high_anonymous", [
+        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/common", [
+            'query'           => ['anonymity' => 'high_anonymous'],
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),
         ])->getBody()->getContents();
@@ -266,7 +267,7 @@ class Reptile
         ];
 
         $contents = $client->request('GET', $url, [
-            'proxy'           => [$proxy->protocol => $proxy->protocol . '://' . $proxy->ip . ':' . 8080],
+            'proxy'           => $proxy->protocol . '://' . $proxy->ip . ':' . $proxy->port,
             'cookies'         => new \GuzzleHttp\Cookie\CookieJar(),
             'headers'         => $header,
             'verify'          => TRUE,
@@ -276,6 +277,8 @@ class Reptile
 
         if (strtoupper($this->reptile['charset']) !== 'UTF-8')
             $contents = $this->changeCharset($contents);
+
+        print_r($contents);die;
         return $contents;
     }
 }

@@ -1,13 +1,14 @@
 <?php
 return [
     'charset'        => 'GBK',
-    'domain'         => [
-        'http://98.126.88.66:80/',
-        'http://98.126.88.67:80/',
-        'http://98.126.88.68:80/',
-        'http://98.126.88.69:80/',
-        'http://98.126.88.70:80/',
-    ],
+//    'domain'         => [
+//        'http://98.126.88.66:80/',
+//        'http://98.126.88.67:80/',
+//        'http://98.126.88.68:80/',
+//        'http://98.126.88.69:80/',
+//        'http://98.126.88.70:80/',
+//    ],
+    'domain'         => 'http://www.quanshuwang.com/',
     'host'           => 'http://www.quanshuwang.com/',
     'list_url'       => 'all/postdate_{cate}_0_0_0_0_0_{page}.html',
     'list_url_extra' => '',

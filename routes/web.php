@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $reptile = new \App\Fiction\Reptile();
+    return $reptile->getList();
 });
