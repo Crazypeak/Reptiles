@@ -253,7 +253,7 @@ class Reptile
     {
         $client = new Client(['curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1]]);
         $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/common", [
-            'query'           => ['anonymity' => 'high_anonymous'],
+            'query'           => ['anonymity' => 'high_anonymous','protocol'=>'http'],
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),
         ])->getBody()->getContents();
