@@ -271,7 +271,7 @@ class Reptile
             'Referer'            => 'http://www.quanshuwang.com/',
         ];
 
-        $contents = $client->request('GET', 'http://xs.xxtkfp.com/api/test', [
+        $contents = $client->request('GET', $url, [
             'proxy'           => $proxy->protocol . '://' . $proxy->ip . ':' . $proxy->port,
             'cookies'         => new \GuzzleHttp\Cookie\CookieJar(),
             'headers'         => $header,
