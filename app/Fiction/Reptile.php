@@ -273,8 +273,8 @@ class Reptile
 
         $contents = $client->request('GET', $url, [
             'proxy'           => [
-                'http://' . $proxy->ip . ':' . $proxy->port,
-                'https://' . $proxy->ip . ':' . $proxy->port,
+                'http' => 'http://' . $proxy->ip . ':' . $proxy->port,
+                'https' => 'https://' . $proxy->ip . ':' . $proxy->port,
             ],
             'cookies'         => new \GuzzleHttp\Cookie\CookieJar(),
             'headers'         => $header,
