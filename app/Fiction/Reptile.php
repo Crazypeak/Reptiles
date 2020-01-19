@@ -142,6 +142,8 @@ class Reptile
         $num_cn = array_merge($num_cn, ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '百', '千', '万', '亿']);
         $num_ar = array_merge($num_ar, ['1', '2', '3', '4', '5', '6', '7', '8', '9', '', '', '', '', '']);
 
+        $char = "。、！？：；﹑•＂…‘’“”〝〞∕¦‖—　〈〉﹞﹝「」‹›〖〗】【»«』『〕〔》《﹐¸﹕︰﹔！¡？¿﹖﹌﹏﹋＇´ˊˋ―﹫︳︴¯＿￣﹢﹦﹤‐­˜﹟﹩﹠﹪﹡﹨﹍﹉﹎﹊ˇ︵︶︷︸︹︿﹀︺︽︾ˉ﹁﹂﹃﹄︻︼（）";
+
         //正则分隔
         $pattern = str_replace(['[link]', '[title]', '[string]', '?', '/', '|', '+', '-', '.', '[', ']', 'XXXX', 'CCCC'], ['XXXX', 'XXXX', 'CCCC', '\\?', '\\/', '\\|', '\\+', '\\-', '\\.', '\\[', '\\]', '([\\w\\W]*?)', '(.*?)'], addslashes($this->reptile['chapter_regx']));
         preg_match_all('/' . $pattern . '/s', $chapter['area_html'], $matches);
@@ -151,7 +153,9 @@ class Reptile
             $title = explode('，共', $matches[$title_key][$i]);
             $data['font_count'] += (int)substr($title[1], 0, -1);
 
-            $chapter_list[floor(str_replace($num_cn, $num_ar, $title[0]))] = [
+            $key = str_replace($num_cn, $num_ar, $title[0]);
+            $key = str_replace(['/[[:punct:]]/i','/['.$char.']/u'], '', $key);
+            $chapter_list[floor(trim($key))] = [
                 'article_id'   => $row->id,
                 'chapter_id'   => intval(str_replace($this->reptile['host'] . $row->url . '/', '', $matches[$link_key][$i])),
                 'chapter_name' => $title[0],
