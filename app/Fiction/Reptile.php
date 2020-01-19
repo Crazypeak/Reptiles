@@ -68,7 +68,7 @@ class Reptile
             $data['author'] = str_replace('作者：', '', $item['author']);
             $data['category_id'] = $cate_page[$cate_k]['my_cate'];
 //            $data['category'] = $category->name;
-            $data['status'] = 1;
+            $data['status'] = 0;
 
             $data['created_at'] = date('Y-m-d H:i:s');
 
@@ -168,6 +168,7 @@ class Reptile
             $data['updated_at'] = date('Y-m-d H:i:s');
         }
 
+        $data['status'] = 1;
         DB::table('articles')->where(['id' => $row->id])->update($data);
         return $chapter_list ?? $this->saveLog('Error: article chapter empty');
     }
@@ -202,7 +203,7 @@ class Reptile
     private function getHtml(string $url, array $rules = [], string $pre_filter = '')
     {
         try {
-            $html_contents = $this->curlGetContents($url, TRUE);
+            $html_contents = $this->curlGetContents($url, 'common');
 
             //过滤“文字水印”
             if ($pre_filter) {
@@ -249,10 +250,12 @@ class Reptile
     }
 
     //curl伪装访问
-    private function curlGetContents(string $url, bool $un_header = FALSE)
+    private function curlGetContents(string $url, string $quality = 'premium')
     {
+        $quality = ['common','stable','premium'];
+
         $client = new Client(['curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1]]);
-        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/common", [
+        $proxy = $client->request('GET', "http://localhost/api/proxies/".$quality[array_rand($quality)], [
             'query'           => ['anonymity' => 'high_anonymous','protocol'=>'http'],
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),
