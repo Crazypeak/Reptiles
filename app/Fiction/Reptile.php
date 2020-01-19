@@ -15,7 +15,7 @@ class Reptile
 
     function __construct()
     {
-        $this->reptile = config('reptile');
+        $this->reptile = config('reptile.35zww');
         if (!Storage::disk('local')->exists('log\cate')) {
             Storage::disk('local')->put('log\cate', json_encode($this->reptile['list_cate']));
             Storage::disk('local')->put('log\chapter', 1);
@@ -54,6 +54,7 @@ class Reptile
         $rules['title'] = [$this->reptile['list_title_selector'], 'text'];
         $rules['thumb'] = [$this->reptile['list_thumb_selector'], 'src'];
         $rules['author'] = [$this->reptile['list_author_selector'], 'text'];
+        $rules['count'] = [$this->reptile['list_author_selector'], 'text'];
 
         $list = $this->getHtml($this->reptile['domain'] . $url, $rules);
         if (!$list) {
@@ -64,8 +65,9 @@ class Reptile
         foreach ($list as $item) {
             $data['url'] = str_replace($this->reptile['host'], '', $item['url']);
             $data['title'] = $item['title'];
-            $data['thumb'] = $item['thumb'];
+//            $data['thumb'] = $item['thumb'];
             $data['author'] = str_replace('作者：', '', $item['author']);
+            $data['font_count'] = (int)str_replace('K', 000, $item['count']);
             $data['category_id'] = $cate_page[$cate_k]['my_cate'];
 //            $data['category'] = $category->name;
             $data['status'] = 0;
@@ -259,7 +261,7 @@ class Reptile
         $quality = ['common','stable','premium'];
 
         $client = new Client(['curl' => [CURLOPT_SSLVERSION => CURL_SSLVERSION_TLSv1]]);
-        $proxy = $client->request('GET', "http://localhost/api/proxies/".$quality[array_rand($quality)], [
+        $proxy = $client->request('GET', "http://47.244.114.115/api/proxies/".$quality[array_rand($quality)], [
             'query'           => ['anonymity' => 'high_anonymous','protocol'=>'http'],
             'connect_timeout' => $this->timeout,
             'timeout'         => config('proxy.timeout'),
